@@ -1,62 +1,101 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
-  height:100vh;
+  height: 100vh;
   width: 100%;
 `;
+
 const Header = styled.div`
-  height:auto;
+  height: auto;
   width: 100%;
   background-color: #220442;
   padding: 1vh 0 0 0;
 `;
+
 const Banner = styled.img`
   width: 100%;
 `;
+
 const Buttons = styled.div`
   height: auto;
   width: 100%;
   margin-bottom: 3vh;
 
-  h1{
+  h1 {
     margin: 3vh;
-    color: #DEDEDE;
+    color: #dedede;
     font-size: 2vh;
   }
-  .icons{
+
+  .icons {
     margin: -1vh 5vh;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 `;
+
 const BtnImages = styled.img`
   height: 12vh;
   padding: 0 1.5vh;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  /* &:hover {
+    transform: scale(1.05);
+  } */
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    outline: none;
+  }
+
+  /* For Safari and Chrome (sometimes adds blue border) */
+  -webkit-tap-highlight-color: transparent;
 `;
+
 const Hlower = styled.img`
   width: 100%;
-`
+`;
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  // 🔹 Function to handle navigation
+  const handleCheckBalanceClick = () => {
+    console.log("Navigating to Check Balance page...");
+    navigate('/check-balance');
+  };
+
   return (
     <Container>
       <Header>
-        <Banner src='banner.png' />
+        <Banner src="banner.png" alt="Banner" />
       </Header>
+
       <Buttons>
         <h1>Money Transfers</h1>
         <div className="icons">
-          <BtnImages src='TMN.png' />
-          <BtnImages src='TBS.png' />
-          <BtnImages src='RG.png' />
-          <BtnImages src='CB.png' />
+          <BtnImages src="TMN.png" alt="Transfer Money Now" />
+          <BtnImages src="TBS.png" alt="To Bank" />
+          <BtnImages src="RG.png" alt="Recharge" />
+          {/* ✅ This button navigates to another page */}
+          <BtnImages
+            src="CB.png"
+            alt="Check Balance"
+            onClick={handleCheckBalanceClick}
+          />
         </div>
       </Buttons>
-      <Hlower src='H-LOWER.png' />
-    </Container>
-  )
-}
 
-export default Home
+      <Hlower src="H-LOWER.png" alt="Footer" />
+    </Container>
+  );
+};
+
+export default Home;
