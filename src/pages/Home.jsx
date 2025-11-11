@@ -25,7 +25,6 @@ const Buttons = styled.div`
 
   h1 {
     margin: 3vh;
-    color: #dedede;
     font-size: 2vh;
   }
 
