@@ -37,14 +37,10 @@ const Buttons = styled.div`
 `;
 
 const BtnImages = styled.img`
-  height: 12vh;
+  height: 11.3vh;
   padding: 0 1.5vh;
   cursor: pointer;
   transition: transform 0.2s ease;
-
-  /* &:hover {
-    transform: scale(1.05);
-  } */
 
   &:focus {
     outline: none;
@@ -67,7 +63,6 @@ const Home = () => {
 
   // 🔹 Function to handle navigation
   const handleCheckBalanceClick = () => {
-    console.log("Navigating to Check Balance page...");
     navigate('/check-balance');
   };
 
