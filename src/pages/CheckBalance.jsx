@@ -6,11 +6,14 @@ import { IoIosArrowForward } from "react-icons/io";
 import { CiWallet } from "react-icons/ci";
 import { useNavigate } from 'react-router-dom';
 import { GoPlusCircle } from "react-icons/go";
+import "../App.css";
 
 const Container = styled.div`
   height: 100vh;
   width: 100%;
   padding: 3vh 2vh;
+  background-color: #0D0D0D;
+  color: #dedede;
 `;
 const Header = styled.nav`
   height: auto;

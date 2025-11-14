@@ -5,6 +5,9 @@ import { useNavigate } from 'react-router-dom';
 const Container = styled.div`
   height: 100vh;
   width: 100%;
+  color: #dedede;
+  background-color: #0D0D0D;
+
 `;
 
 const Header = styled.div`
