@@ -130,17 +130,6 @@ const Pin = () => {
   };
 
   const handleOk = () => {
-    let pin = "";
-
-    refs.forEach(ref => {
-      pin += ref.current.value || "";
-    });
-
-    if (pin.length !== 6) {
-      alert("Please enter complete 6-digit PIN");
-      return;
-    }
-
     // Navigate to any route you want
     navigate("/success");  // ⬅️ Change route here
   };
