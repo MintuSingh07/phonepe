@@ -31,14 +31,18 @@ const PinBox = styled.input`
   width: 5vh;
   height: 4vh;
   text-align: center;
-  font-size: 2.2vh;
+  font-size: 5vh;
   border: none;
-  border-bottom: 2px solid #bdbdbd;
+
+  border-bottom: ${(props) =>
+    props.isFilled ? "none" :
+    props.isActive ? "2px solid #000" :
+    "2px solid #bdbdbd"};
+
   outline: none;
 
-  &:focus {
-    border-bottom: 2px solid #000;
-  }
+  -webkit-text-security: disc;
+  text-security: disc;
 `;
 
 const UpiNotification = styled.div`
@@ -75,7 +79,6 @@ const NumKey = styled.div`
   width: 10vh;
   user-select: none;
   color: #183994;
-
 `;
 
 const ClearKey = styled.div`
@@ -103,13 +106,20 @@ const OkKey = styled.div`
 `;
 
 const Pin = () => {
+  const navigate = useNavigate();
   const refs = Array.from({ length: 6 }, () => useRef(null));
+
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [filled, setFilled] = useState([false, false, false, false, false, false]);
 
   const addDigit = (num) => {
     if (currentIndex > 5) return;
 
     refs[currentIndex].current.value = num;
+
+    const updated = [...filled];
+    updated[currentIndex] = true;
+    setFilled(updated);
 
     if (currentIndex < 5) {
       setCurrentIndex(currentIndex + 1);
@@ -126,12 +136,16 @@ const Pin = () => {
     }
 
     refs[newIndex].current.value = "";
+
+    const updated = [...filled];
+    updated[newIndex] = false;
+    setFilled(updated);
+
     setCurrentIndex(newIndex);
   };
 
   const handleOk = () => {
-    // Navigate to any route you want
-    navigate("/success");  // ⬅️ Change route here
+    navigate("/avlBalance");
   };
 
   return (
@@ -174,12 +188,10 @@ const Pin = () => {
             key={index}
             maxLength={1}
             ref={inputRef}
-            readOnly        // 🔒 prevents typing
-            inputMode="none" // 🚫 prevents keyboard
-            onFocus={(e) => {
-              e.target.blur(); // 🚫 blur to avoid keyboard
-              setCurrentIndex(index);
-            }}
+            readOnly
+            inputMode="none"
+            isFilled={filled[index]}
+            isActive={currentIndex === index}
           />
         ))}
       </PinInputWrapper>
@@ -198,7 +210,6 @@ const Pin = () => {
         </p>
       </UpiNotification>
 
-      {/* NUMBER PAD */}
       <NumberPad>
         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(num => (
           <NumKey key={num} onClick={() => addDigit(num)}>
